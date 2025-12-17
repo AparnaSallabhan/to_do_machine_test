@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_machine_test/core/common/widgets/loader.dart';
 import 'package:to_do_machine_test/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:to_do_machine_test/features/todo/presentation/pages/home_page.dart';
+// import 'package:to_do_machine_test/features/todo/presentation/pages/home_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -12,6 +12,12 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthBloc>().add(AuthIsUserLoggedIn());
+  }
+
   final formkey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
@@ -33,15 +39,15 @@ class _AuthPageState extends State<AuthPage> {
         padding: const EdgeInsets.all(20),
         child: BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
-            if (state is AuthFailure) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text(state.message)));
-            }
+            // if (state is AuthFailure) {
+            //   ScaffoldMessenger.of(
+            //     context,
+            //   ).showSnackBar(SnackBar(content: Text(state.message)));
+            // }
 
-            if (state is AuthSuccess) {
-              Navigator.pushReplacement(context, HomePage.route());
-            }
+            // if (state is AuthSuccess) {
+            //   Navigator.pushReplacement(context, HomePage.route());
+            // }
           },
           builder: (context, state) {
             if (state is AuthLoading) {
