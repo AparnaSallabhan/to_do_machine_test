@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_machine_test/core/common/widgets/loader.dart';
 import 'package:to_do_machine_test/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:to_do_machine_test/features/todo/presentation/pages/home_page.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -36,6 +37,10 @@ class _AuthPageState extends State<AuthPage> {
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(state.message)));
+            }
+
+            if (state is AuthSuccess) {
+              Navigator.pushReplacement(context, HomePage.route());
             }
           },
           builder: (context, state) {
